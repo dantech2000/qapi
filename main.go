@@ -18,11 +18,13 @@ var rootCmd = &cobra.Command{
 
 var apiURL string
 var flagNoColor bool
+var apiKey string
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&apiURL, "url", "u", "", "The API URL to fetch data from")
 	rootCmd.MarkPersistentFlagRequired("url")
 	rootCmd.PersistentFlags().BoolVar(&flagNoColor, "no-color", false, "This flag disables color output to stdout")
+	rootCmd.PersistentFlags().StringVarP(&apiKey, "key", "k", "", "This flag attaches an API Key header to the HTTP Request")
 }
 
 func main() {
@@ -33,10 +35,19 @@ func main() {
 }
 
 func qapi(cmd *cobra.Command, args []string) {
-	resp, err := http.Get(apiURL)
+	req, err := http.NewRequest("GET", apiURL, nil)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
+	}
+	if apiKey != "" {
+		req.Header.Set("Authorization", "Bearer "+apiKey)
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error:", err)
 	}
 	defer resp.Body.Close()
 
