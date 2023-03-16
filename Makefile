@@ -1,7 +1,7 @@
 
 
-build: 
-	go build -o ./src/qapi main.go
+build: clean
+	go build -o ./bin/qapi main.go
 
 clean:
-	rm -rf ./src
+	rm -rf ./bin
