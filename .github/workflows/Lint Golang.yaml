@@ -1,0 +1,14 @@
+name: Lint Golang
+
+on: [pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          go-version: 1.19
+      - name: Lint # lint the code
+        run: go run github.com/golangci/golangci-lint/cmd/golangci-lint run
