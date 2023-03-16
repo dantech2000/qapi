@@ -1,14 +1,27 @@
-name: Lint Golang
+name: golangci-lint
 
-on: [pull_request]
+on:
+  push:
+    tags:
+      - v*
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
+  golangci:
+    name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-go@v3
         with:
           go-version: 1.19
-      - name: Lint # lint the code
-        run: go run github.com/golangci/golangci-lint/cmd/golangci-lint run
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.28
+          args: --timeout 5m
