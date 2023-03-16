@@ -31,7 +31,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&apiKey, "key", "k", "", "This flag attaches an API Key header to the HTTP Request")
 	rootCmd.PersistentFlags().StringVarP(&format, "output", "o", "json", "This flag set the output format")
 	rootCmd.PersistentFlags().BoolVar(&flagNoColor, "no-color", false, "This flag disables color output to stdout")
-	rootCmd.MarkFlagRequired("url")
+	_ = rootCmd.MarkPersistentFlagRequired("url")
 }
 
 func main() {

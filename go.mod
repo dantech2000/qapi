@@ -5,7 +5,6 @@ go 1.19
 require (
 	github.com/alecthomas/chroma v0.10.0
 	github.com/fatih/color v1.14.1
-	github.com/gocarina/gocsv v0.0.0-20230226133904-70c27cb2918a
 	github.com/spf13/cobra v1.6.1
 	gopkg.in/yaml.v2 v2.4.0
 )
