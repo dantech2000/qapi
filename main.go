@@ -95,7 +95,7 @@ func printJSONOutput(body []byte) {
 	}
 
 	// Colorize and print the output
-	quick.Highlight(os.Stdout, string(prettyJSON), "json", "terminal256", "native")
+	_ = quick.Highlight(os.Stdout, string(prettyJSON), "json", "terminal256", "native")
 }
 
 func printYAMLOutput(body []byte) {
@@ -114,7 +114,7 @@ func printYAMLOutput(body []byte) {
 	}
 
 	// Colorize and print the output
-	quick.Highlight(os.Stdout, string(prettyYAML), "yaml", "terminal256", "native")
+	_ = quick.Highlight(os.Stdout, string(prettyYAML), "yaml", "terminal256", "native")
 }
 
 // func printCSVOutput(body []byte) {
